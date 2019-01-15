@@ -1,4 +1,4 @@
-package io.cucumber.skeleton;
+package io.cucumber.shouty;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
