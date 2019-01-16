@@ -12,8 +12,8 @@ public class PersonTest {
 
     @Test
     public void it_subscribes_to_the_network() {
-        Person lucy = new Person(network, 100);
-        verify(network).subscribe(lucy);
+        Person person = new Person(network, 100);
+        verify(network).subscribe(person);
     }
 
     @Test
@@ -22,13 +22,12 @@ public class PersonTest {
         assertEquals(100, person.getLocation());
     }
 
-
     @Test
     public void broadcasts_shouts_to_the_network() {
         String message = "Free bagels!";
         Person sean = new Person(network, 0);
         sean.shout(message);
-        verify(network).broadcast(message, 0);
+        verify(network).broadcast(message, sean);
     }
 
     @Test
@@ -38,5 +37,4 @@ public class PersonTest {
         lucy.hear(message);
         assertEquals(asList(message), lucy.getMessagesHeard());
     }
-
 }

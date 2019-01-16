@@ -18,6 +18,7 @@ Feature: Shout
       | name     | Sean | Lucy | Larry |
       | location | 0    | 100  | 150   |
 
+  @focus
   Scenario: Listener is within range
     When Sean shouts "Free bagels!"
     Then Lucy hears Sean's message
@@ -34,11 +35,5 @@ Feature: Shout
       | Free toast!  |
 
     Scenario: Message is too long
-      When Sean shouts:
-      """
-      This is a really long message
-      so long in fact I am not going to be allowed
-      to send it, at least if I keep typing like this until the length is over
-      180 characters 180 characters 180 characters
-      """
+      When Sean shouts an over-long message
       Then nobody hears Sean's message
