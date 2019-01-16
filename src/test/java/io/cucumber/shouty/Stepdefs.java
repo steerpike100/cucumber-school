@@ -18,10 +18,10 @@ import static org.junit.Assert.assertThat;
 
 public class Stepdefs {
 
-    private Network network;
     private final ShoutSupport shoutSupport;
+    private Network network;
 
-    public Stepdefs(ShoutSupport shoutSupport){
+    public Stepdefs(ShoutSupport shoutSupport) {
         this.shoutSupport = shoutSupport;
     }
 
@@ -47,51 +47,50 @@ public class Stepdefs {
         }
     }
 
-    @When("^Sean shouts a message containing the word \"([^\"]*)\"$")
-    public void seanShoutsAMessageContainingTheWord(String word) throws Throwable {
-        shoutSupport.seanShout("here is a message containing the word " + word);
+    @When("^Sean shouts a message containing the word \"(.*?)\"$")
+    public void sean_shouts_a_message_containing_the_word(String word) throws Throwable {
+        shoutSupport.seanShout("a message containing the word " + word);
     }
 
     @When("^Sean shouts (\\d+) messages containing the word \"(.*?)\"$")
     public void sean_shouts_messages_containing_the_word(int num, String word) throws Throwable {
-      for(int j=0; j<num; j++){
-          shoutSupport.seanShout("here is a message containing the word " + word);
-      }
+        for(int j = 0; j < num; j++) {
+            shoutSupport.seanShout("a message containing the word " + word);
+        }
     }
 
-
-    @And("^Sean shouts a message$")
-    public void seanShoutsAMessage() throws Throwable {
+    @When("^Sean shouts a message$")
+    public void sean_shouts_a_message() throws Throwable {
         shoutSupport.seanShout("here is a message");
     }
 
-    @And("^Sean shouts a long message$")
-    public void seanShoutsALongMessage() throws Throwable {
-        String longMessage = shoutSupport.longMessage();
+    @When("^Sean shouts a long message$")
+    public void sean_shouts_a_long_message() throws Throwable {
+        String longMessage = "";
+        for(int i = 0; i < 180; i++) longMessage += "x";
+        shoutSupport.seanShout(longMessage);
+    }
+
+    @When("^Sean shouts an over-long message$")
+    public void sean_shouts_an_over_long_message() throws Throwable {
+        String longMessage = "";
+        for(int i = 0; i < 181; i++) longMessage += "x";
+        shoutSupport.seanShout(longMessage);
+    }
+
+    @When("^Sean shouts (\\d+) over-long message$")
+    public void sean_shouts_over_long_message(int num) throws Throwable {
+        for(int j = 0; j < num; j++) {
+            String longMessage = "";
+            for(int i = 0; i < 181; i++) longMessage += "x";
             shoutSupport.seanShout(longMessage);
+        }
     }
-
-    @And("^Sean shouts an over-long message$")
-    public void seanShoutsAnOverLongMessage() throws Throwable {
-        String overLongMessage = shoutSupport.overLongMessage();
-            shoutSupport.seanShout(overLongMessage);
-    }
-
-
-//    @And("^Sean shouts (\\d+) over-long messages$")
-//    public void seanShoutsOverLongMessages(int num) throws Throwable {
-//        for (int j = 0; j < num; j++) {
-//            String overLogMessage =  shoutSupport.overLongMessage();
-//                shoutSupport.seanShout(overLogMessage);
-//            }
-//    }
-
 
     @When("^Sean shouts \"(.*?)\"$")
     public void sean_shouts(String message) throws Throwable {
         shoutSupport.seanShout(message);
     }
-
 
     @When("^Sean shouts:$")
     public void sean_shouts_longer_message(String message) throws Throwable {

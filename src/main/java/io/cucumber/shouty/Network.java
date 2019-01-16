@@ -6,7 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Network {
-    public static final Pattern BUY_PATTERN = Pattern.compile("buy", Pattern.CASE_INSENSITIVE);
     private final List<Person> listeners = new ArrayList<Person>();
     private final int range;
 
@@ -21,7 +20,6 @@ public class Network {
     public void broadcast(String message, Person shouter) {
         int shouterLocation = shouter.getLocation();
         boolean shortEnough = message.length() <= 180;
-        deductCredits(shortEnough, message, shouter);
         for (Person listener : listeners) {
             boolean withinRange = Math.abs(listener.getLocation() - shouterLocation) <= range;
             if (withinRange && (shortEnough || shouter.getCredits() >= 0)) {
@@ -30,13 +28,6 @@ public class Network {
         }
     }
 
-    private void deductCredits(boolean shortEnough, String message, Person shouter) {
-        if (!shortEnough) {
-            shouter.setCredits(shouter.getCredits() - 2);
-        }
-        Matcher matcher = BUY_PATTERN.matcher(message);
-        while(matcher.find()) {
-            shouter.setCredits(shouter.getCredits() - 5);
-        }
+
     }
-}
+

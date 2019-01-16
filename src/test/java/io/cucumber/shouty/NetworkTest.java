@@ -1,5 +1,6 @@
 package io.cucumber.shouty;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
@@ -12,6 +13,8 @@ public class NetworkTest {
     private Network network = new Network(range);
     private String message = "Free bagels!";
 
+
+    //Broadcasting Messages
     @Test
     public void broadcasts_a_message_to_a_listener_within_range() {
         Person sean = mock(Person.class);
@@ -24,7 +27,7 @@ public class NetworkTest {
     }
 
     @Test
-    public void does_not_broadcast_a_message_to_a_litener_out_of_range() {
+    public void does_not_broadcast_a_message_to_a_listener_out_of_range() {
         Person sean = mock(Person.class);
         when(sean.getLocation()).thenReturn(0);
         Person laura = mock(Person.class);
@@ -36,7 +39,7 @@ public class NetworkTest {
     }
 
     @Test
-    public void does_not_broadcast_a_message_to_a_litener_out_of_range_negative_distance() {
+    public void does_not_broadcast_a_message_to_a_listener_out_of_range_negative_distance() {
         Person sally = mock(Person.class);
         when(sally.getLocation()).thenReturn(101);
         Person lionel = mock(Person.class);
@@ -48,6 +51,15 @@ public class NetworkTest {
     }
 
     @Test
+    @Ignore
+    public void does_not_broadcast_messages_longer_than_180_chars_when_shouter_is_broke() {
+
+    }
+
+
+    //???
+    @Test
+    @Ignore
     public void does_not_broadcast_messages_longer_than_180_chars_even_within_range() {
         Person sean = mock(Person.class);
         when(sean.getLocation()).thenReturn(0);

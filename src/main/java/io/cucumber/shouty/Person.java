@@ -2,9 +2,12 @@ package io.cucumber.shouty;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Person {
+    public static final Pattern BUY_PATTERN = Pattern.compile("buy", Pattern.CASE_INSENSITIVE);
     private final List<String> messagesHeard = new ArrayList<String>();
     private final Network network;
     private final int location;
@@ -22,7 +25,18 @@ public class Person {
     }
 
     public void shout(String message) {
+        deductCredits(message);
         network.broadcast(message, this);
+    }
+
+    private void deductCredits(String message) {
+        if (message.length() <=180) {
+            credits -= 2;
+        }
+        Matcher matcher = BUY_PATTERN.matcher(message);
+        while (matcher.find()) {
+        credits -= 5;
+        }
     }
 
     public void hear(String message) {

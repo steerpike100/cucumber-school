@@ -1,13 +1,12 @@
 Feature: Premium account
 
   Rules:
-    - mention the word "buy" and you lose 5 credits
-    - long messages cost 2 credits
-    - over-long messages cost 2 credits
+  - mention the word "buy" and you lose 5 credits
+  - over-long messages cost 2 credits
 
   Questions:
-    - what happens if a message both has the word "buy" in it *and* is over-long?
-    - what happens when Sean runs out of credit
+  - what happens if a message both has the word "buy" in it *and* is over-long?
+  - what happens when Sean runs out of credits?
 
   Background:
     Given the range is 100
@@ -15,9 +14,9 @@ Feature: Premium account
       | name     | Sean | Lucy |
       | location | 0    | 100  |
 
-    Scenario: Sean shouts several over-long messages
+  Scenario: Sean shouts several over-long messages
     Given Sean has bought 30 credits
-    When Sean shouts 2 over-long messages
+    When Sean shouts 2 over-long message
     Then Lucy hears all Sean's messages
     And Sean should have 26 credits
 
@@ -27,9 +26,8 @@ Feature: Premium account
     Then Lucy hears all Sean's messages
     And Sean should have 15 credits
 
-
-#  @todo
-#  Scenario: BUG #2789
-#    Given Sean has bought 30 credits
-#    When Sean shouts "buy, buy buy!"
-#    Then Sean should have 25 credits
+  @todo
+  Scenario: BUG #2789
+    Given Sean has bought 30 credits
+    When Sean shouts "buy, buy buy!"
+    Then Sean should have 25 credits

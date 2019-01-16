@@ -21,7 +21,7 @@ public class ShoutSupport {
         messages.add(message);
     }
 
-    public String longMessage(){
+    public String longMessage() {
         String longMessage = "";
         for (int i = 0; i < 180; i++) {
             longMessage += "x";
@@ -30,7 +30,7 @@ public class ShoutSupport {
         return longMessage;
     }
 
-    public String overLongMessage(){
+    public String overLongMessage() {
         String overLongMessage = "";
         for (int i = 0; i < 181; i++) {
             overLongMessage += "x";
@@ -39,4 +39,11 @@ public class ShoutSupport {
         return overLongMessage;
     }
 
+    public String messagesContainingGivenWord(int num, String word) {
+        for (int j = 0; j < num; j++) {
+            seanShout("here is a message containing the word " + word);
+        }
+
+        return word;
+    }
 }

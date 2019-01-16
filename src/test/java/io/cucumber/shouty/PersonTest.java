@@ -1,11 +1,15 @@
 package io.cucumber.shouty;
 
+import org.junit.Ignore;
 import org.junit.Test;
+
+import java.util.Collections;
 
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class PersonTest {
     private final Network network = mock(Network.class);
@@ -36,5 +40,23 @@ public class PersonTest {
         Person lucy = new Person(network, 100);
         lucy.hear(message);
         assertEquals(asList(message), lucy.getMessagesHeard());
+    }
+
+    //Charging for shouts
+    @Test
+    public void deducts_5_credits_when_the_shouter_mentions_the_word_buy() {
+        Person sean = new Person(network,0);
+        sean.setCredits(100);
+        sean.shout("here is a message containing the word buy");
+        assertEquals(95, sean.getCredits());
+    }
+
+    @Test
+    public void deducts_2_credits_when_shouters_message_is_over_180_chars() {
+        Person sean = new Person(network, 0);
+        sean.setCredits(100);
+        String overlongMessage = String.join("", Collections.nCopies(181, "x"));
+        sean.shout(overlongMessage);
+        assertEquals(95, sean.getCredits());
     }
 }

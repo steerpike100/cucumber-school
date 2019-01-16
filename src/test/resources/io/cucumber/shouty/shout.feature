@@ -7,10 +7,7 @@ Feature: Shout
   Rules:
   - max length of message is 180 characters
   - only shout to people within a certain distance
-  - people remember everything
-
-  To do:
-  - only shout to people within a certain distance
+  - people remember everything they've heard
 
   Background:
     Given the range is 100
@@ -18,7 +15,6 @@ Feature: Shout
       | name     | Sean | Lucy | Larry |
       | location | 0    | 100  | 150   |
 
-  @focus
   Scenario: Listener is within range
     When Sean shouts "Free bagels!"
     Then Lucy hears Sean's message
@@ -27,13 +23,21 @@ Feature: Shout
     When Sean shouts "Free bagels!"
     Then Larry does not hear Sean's message
 
-  Scenario: Two Shouts
+  Scenario: Two shouts
     When Sean shouts "Free bagels!"
-    When Sean shouts "Free toast!"
+    And Sean shouts "Free toast!"
     Then Lucy hears the following messages:
       | Free bagels! |
       | Free toast!  |
 
-    Scenario: Message is too long
-      When Sean shouts an over-long message
-      Then nobody hears Sean's message
+  Scenario: Message is too long
+    When Sean shouts:
+      """
+      This is a really long message
+      so long in fact that I am not going to be allowed
+      to send it, at least if I keep typing like this
+      until the length is over the limit of 180
+      characters.
+      """
+    Then nobody hears Sean's message
+
