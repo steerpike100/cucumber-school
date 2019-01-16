@@ -1,6 +1,5 @@
 package io.cucumber.shouty;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -9,7 +8,6 @@ import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class PersonTest {
     private final Network network = mock(Network.class);
