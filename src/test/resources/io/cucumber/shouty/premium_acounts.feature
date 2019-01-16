@@ -31,3 +31,10 @@ Feature: Premium account
     Given Sean has bought 30 credits
     When Sean shouts "buy, buy buy!"
     Then Sean should have 25 credits
+
+
+  Scenario: Run out of credit
+    Given Sean has bought 4 credits
+    When Sean shouts a message containing the word "buy"
+    Then Lucy does not hear Sean's message
+    And Sean should have 4 credits

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Network {
     private final List<Person> listeners = new ArrayList<Person>();
@@ -18,14 +19,15 @@ public class Network {
     }
 
     public void broadcast(String message, Person shouter) {
-        int shouterLocation = shouter.getLocation();
-        boolean shortEnough = message.length() <= 180;
-        for (Person listener : listeners) {
-            boolean withinRange = Math.abs(listener.getLocation() - shouterLocation) <= range;
-            if (withinRange && (shortEnough || shouter.getCredits() >= 0)) {
-                listener.hear(message);
-            }
+        for (Person listener : listenersWithinRangeOf(shouter)) {
+            listener.hear(message);
         }
+    }
+
+    private List<Person> listenersWithinRangeOf(Person shouter) {
+        return listeners.stream().filter(listener ->
+                Math.abs(listener.getLocation() - shouter.getLocation()) <= range
+        ).collect(Collectors.toList());
     }
 
 

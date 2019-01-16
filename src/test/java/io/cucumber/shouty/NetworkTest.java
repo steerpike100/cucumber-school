@@ -50,29 +50,4 @@ public class NetworkTest {
         verify(lionel, never()).hear(message);
     }
 
-    @Test
-    @Ignore
-    public void does_not_broadcast_messages_longer_than_180_chars_when_shouter_is_broke() {
-
-    }
-
-
-    //???
-    @Test
-    @Ignore
-    public void does_not_broadcast_messages_longer_than_180_chars_even_within_range() {
-        Person sean = mock(Person.class);
-        when(sean.getLocation()).thenReturn(0);
-        when(sean.getCredits()).thenReturn(-1); // Hack to keep tests passing
-        Person lucy = mock(Person.class);
-        when(lucy.getLocation()).thenReturn(100);
-        network.subscribe(lucy);
-        String longMessage = "";
-        for (int i = 0; i < 181; i++) {
-            longMessage += "x";
-        }
-        network.broadcast(longMessage, sean);
-
-        verify(lucy, never()).hear(longMessage);
-    }
 }

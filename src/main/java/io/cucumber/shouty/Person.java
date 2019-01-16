@@ -25,18 +25,32 @@ public class Person {
     }
 
     public void shout(String message) {
+        if (!canAfford(message)) {
+            return;
+        }
         deductCredits(message);
         network.broadcast(message, this);
     }
 
+    private boolean canAfford(String message) {
+        return costOf(message) <= credits;
+    }
+
     private void deductCredits(String message) {
-        if (message.length() <=180) {
-            credits -= 2;
+        int cost = costOf(message);
+        credits -= cost;
+    }
+
+    private int costOf(String message) {
+        int cost = 0;
+        if(message.length() > 180) {
+            cost += 2;
         }
         Matcher matcher = BUY_PATTERN.matcher(message);
-        while (matcher.find()) {
-        credits -= 5;
+        if (matcher.find()) {
+            cost += 5;
         }
+        return cost;
     }
 
     public void hear(String message) {

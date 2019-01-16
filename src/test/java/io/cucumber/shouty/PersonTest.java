@@ -7,6 +7,7 @@ import java.util.Collections;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 public class PersonTest {
@@ -49,12 +50,30 @@ public class PersonTest {
         assertEquals(95, sean.getCredits());
     }
 
+//    @Test
+//    public void deducts_2_credits_when_shouters_message_is_over_180_chars() {
+//        Person sean = new Person(network, 0);
+//        sean.setCredits(100);
+//        String overlongMessage = String.join("", Collections.nCopies(181, "x"));
+//        sean.shout(overlongMessage);
+//        assertEquals(95, sean.getCredits());
+//    }
+
     @Test
-    public void deducts_2_credits_when_shouters_message_is_over_180_chars() {
+    public void does_not_broadcast_messages_over_180_chard_when_shouter_has_insufficient_credits(){
         Person sean = new Person(network, 0);
-        sean.setCredits(100);
+        sean.setCredits(1);
         String overlongMessage = String.join("", Collections.nCopies(181, "x"));
         sean.shout(overlongMessage);
+        verify(network, never()).broadcast(overlongMessage, sean);
+
+    }
+
+    @Test
+    public void only_charges_once_per_shout_for_multiple_mentions_of_buy() {
+        Person sean = new Person(network, 0);
+        sean.setCredits(100);
+        sean.shout("buy buy buy");
         assertEquals(95, sean.getCredits());
     }
 }
