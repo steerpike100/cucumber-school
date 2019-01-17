@@ -1,4 +1,4 @@
-package io.cucumber.shouty;
+package shouty.core;
 
 import java.util.ArrayList;
 import java.util.List;

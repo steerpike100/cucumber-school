@@ -1,4 +1,4 @@
-package io.cucumber.shouty;
+package shouty.core;
 
 import org.junit.Test;
 
@@ -41,32 +41,32 @@ public class PersonTest {
         assertEquals(asList(message), lucy.getMessagesHeard());
     }
 
-    //Charging for shouts
+    // Charging for shouts
+
     @Test
     public void deducts_5_credits_when_the_shouter_mentions_the_word_buy() {
-        Person sean = new Person(network,0);
+        Person sean = new Person(network, 0);
         sean.setCredits(100);
         sean.shout("here is a message containing the word buy");
         assertEquals(95, sean.getCredits());
     }
 
-//    @Test
-//    public void deducts_2_credits_when_shouters_message_is_over_180_chars() {
-//        Person sean = new Person(network, 0);
-//        sean.setCredits(100);
-//        String overlongMessage = String.join("", Collections.nCopies(181, "x"));
-//        sean.shout(overlongMessage);
-//        assertEquals(95, sean.getCredits());
-//    }
+    @Test
+    public void deducts_2_credits_when_shouters_message_is_over_180_chars() {
+        Person sean = new Person(network, 0);
+        sean.setCredits(100);
+        String overlongMessage = String.join("", Collections.nCopies(181, "x"));
+        sean.shout(overlongMessage);
+        assertEquals(98, sean.getCredits());
+    }
 
     @Test
-    public void does_not_broadcast_messages_over_180_chard_when_shouter_has_insufficient_credits(){
+    public void does_not_broadcast_messages_over_180_chars_when_shouter_has_insufficient_credits() {
         Person sean = new Person(network, 0);
         sean.setCredits(1);
         String overlongMessage = String.join("", Collections.nCopies(181, "x"));
         sean.shout(overlongMessage);
         verify(network, never()).broadcast(overlongMessage, sean);
-
     }
 
     @Test
