@@ -43,7 +43,7 @@ public class Person {
 
     private int costOf(String message) {
         int cost = 0;
-        if(message.length() > 180) {
+        if (message.length() > 180) {
             cost += 2;
         }
         Matcher matcher = BUY_PATTERN.matcher(message);

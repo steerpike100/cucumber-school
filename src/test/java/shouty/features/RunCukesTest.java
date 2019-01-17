@@ -5,6 +5,9 @@ import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(plugin = {"pretty"}, strict = true)
+@CucumberOptions(
+        plugin = {"pretty"},
+        features = "src/test/resources/shouty.features",
+        tags = "@focus")
 public class RunCukesTest {
 }

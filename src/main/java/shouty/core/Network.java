@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Network {
     private final List<Person> listeners = new ArrayList<Person>();
     private final int range;
@@ -27,7 +31,6 @@ public class Network {
                 Math.abs(listener.getLocation() - shouter.getLocation()) <= range
         ).collect(Collectors.toList());
     }
+}
 
-
-    }
 

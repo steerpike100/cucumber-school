@@ -5,5 +5,10 @@
 <input type=text name=message>
 <button type=submit>Shout</button>
 </form>
+<ul>
+    {{#messagesHeard}}
+        <li class="message">{{.}}</li>
+    {{/messagesHeard}}
+</ul>
 </body>
 </html>

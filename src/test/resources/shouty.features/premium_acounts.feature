@@ -20,7 +20,6 @@ Feature: Premium account
     Then Lucy hears all Sean's messages
     And Sean should have 26 credits
 
-  @focus
   Scenario: Sean shouts several messages containing the word "buy"
     Given Sean has bought 30 credits
     When Sean shouts 3 messages containing the word "buy"
